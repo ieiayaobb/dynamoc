@@ -27,19 +27,14 @@
     name: 'Connect',
     data () {
       return {
-        host: '192.168.3.187',
-        accessKey: 'patsnap',
-        accessSecret: 'patsnap'
+        host: '127.0.0.1:10500',
+        accessKey: 'access_key',
+        accessSecret: 'access_secret'
       }
     },
     computed: mapGetters({
       show: 'show'
     }),
-    vuex: {
-      getters: {
-        show: (state) => state.connect.show
-      }
-    },
     methods: {
       close () {
         this.$store.dispatch('hideConnect')

@@ -3,6 +3,7 @@ import Vue from 'vue'
 import connect from './modules/connect'
 import result from './modules/result'
 import tables from './modules/tables'
+import keys from './modules/keys'
 import records from './modules/records'
 import * as actions from './actions'
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     connect,
     result,
     tables,
+    keys,
     records
   },
   strict: true

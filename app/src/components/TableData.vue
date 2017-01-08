@@ -1,6 +1,18 @@
 <template>
-  <div>
-    <h2>{{ tableName }}</h2>
+  <div class="table-data">
+    <el-row>
+      <el-col :span="24">
+        <div class="grid-content">
+          <h2>{{ tableName }}</h2>
+        </div>
+        </el-col>
+      <el-col :span="24">
+        <div class="grid-content">
+          <queryCondition></queryCondition>
+        </div>
+      </el-col>
+    </el-row>
+    
     <dataGrid :tableName="tableName"></dataGrid>
     <recordDetail :tableName="tableName"></recordDetail>
   </div>
@@ -10,6 +22,7 @@
   import { mapGetters } from 'vuex'
   import DataGrid from './DataGrid'
   import RecordDetail from './RecordDetail'
+  import QueryCondition from './QueryCondition'
 
   export default {
     computed: mapGetters({
@@ -22,7 +35,11 @@
     },
     name: 'tableData',
     components: {
-      DataGrid, RecordDetail
+      DataGrid, RecordDetail, QueryCondition
     }
   }
 </script>
+<style scoped>
+  .table-data {
+  }
+</style>

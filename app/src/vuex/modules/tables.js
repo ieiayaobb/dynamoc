@@ -3,16 +3,16 @@ import {
 } from '../mutation-types'
 
 const state = {
-  listTables: []
+  tables: []
 }
 
 const getters = {
-  listTables: state => state.listTables
+  tables: state => state.tables
 }
 
 const mutations = {
-  [LIST_TABLES] (state, listTables) {
-    state.listTables = listTables['TableNames']
+  [LIST_TABLES] (state, response) {
+    state.tables = response['TableNames']
   }
 }
 

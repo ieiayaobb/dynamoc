@@ -3,8 +3,7 @@ import {
   connect,
   list,
   record,
-  info,
-  headers
+  info
 } from '../api/index'
 
 import {
@@ -16,7 +15,8 @@ import {
     SET_RESULTS,
     GET_RECORD,
     HIDE_RECORD,
-    LIST_TABLES
+    LIST_TABLES,
+    SET_KEYS
 } from '../vuex/mutation-types'
 
 export const showConnect = ({ commit }) => {
@@ -40,10 +40,9 @@ export const setResults = ({ commit }, payload) => {
   })
 }
 
-export const setPreviousResults = ({ commit }, tableName) => {
-  var lastEvaluatedKey
-  return scan(tableName, lastEvaluatedKey).then((response) => {
-    response['tableName'] = tableName
+export const setPreviousResults = ({ commit }, payload) => {
+  return scan(payload.tableName, payload.lastEvaluatedKey).then((response) => {
+    response['tableName'] = payload.tableName
     commit(SET_RESULTS, response)
   })
 }
@@ -61,7 +60,7 @@ export const hideRecord = ({ commit }) => {
 }
 
 export const getHeaders = ({ commit }, tableName) => {
-  return headers(tableName).then((response) => {
+  return info(tableName).then((response) => {
     commit(GET_TABLE_HEADERS, response)
   })
 }
@@ -75,5 +74,11 @@ export const getInfo = ({ commit }, tableName) => {
 export const listTables = ({ commit }) => {
   return list().then((response) => {
     commit(LIST_TABLES, response)
+  })
+}
+
+export const setKeys = ({ commit }, tableName) => {
+  return info(tableName).then((response) => {
+    commit(SET_KEYS, response)
   })
 }

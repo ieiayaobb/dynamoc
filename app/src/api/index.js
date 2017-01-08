@@ -76,12 +76,6 @@ export const record = (tableName, payload) => {
 }
 
 export const info = (tableName) => {
-  return api('get', '/tables/' + tableName + '/info', {
-
-  })
-}
-
-export const headers = (tableName) => {
   return new Promise(function (resolve, reject) {
     dynamodb.describeTable({
       TableName: tableName

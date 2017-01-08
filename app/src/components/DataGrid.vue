@@ -3,7 +3,9 @@
     <el-table
       :data="results"
       border
-      height="480">      
+      height="480"
+      v-loading.body="loading">
+
       <el-table-column
         fixed
         :prop="header['AttributeName']"
@@ -17,7 +19,7 @@
         :prop="key"
         :label="key"
         v-for="key in normal"
-        width="180"
+        width="150"
         show-overflow-tooltip>
       </el-table-column>
 
@@ -28,15 +30,15 @@
         label="Operation"
         width="120">
         <span>
-          <el-button @click.native.prevent="handleClick($index)" type="text" size="small">Edit</el-button>
-          <el-button @click="deleteRecord" type="text" size="small">Delete</el-button>
+          <el-button @click.native.prevent="handleClick($index)" type="text" size="small">View</el-button>
+          <!-- <el-button @click="deleteRecord" type="text" size="small">Delete</el-button> -->
         </span>
       </el-table-column>
     </el-table>
     <div class="pagination">
       <el-button-group>
-        <el-button type="primary" icon="arrow-left" @click="prevPage">Previous</el-button>
-        <el-button type="primary" @click="nextPage">Next<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+        <!-- <el-button type="primary" icon="arrow-left" @click="prevPage">Previous</el-button> -->
+        <el-button type="primary" size="small" @click="nextPage">Next<i class="el-icon-arrow-right el-icon--right"></i></el-button>
       </el-button-group>
     </div>
   </div>
@@ -49,8 +51,8 @@
   export default {
     computed: {
       ...mapGetters({
-        results: 'results',
         headers: 'headers',
+        results: 'results',
         lastEvaluatedKey: 'lastEvaluatedKey'
       }),
       normal: function () {
@@ -67,7 +69,8 @@
     name: 'dataGrid',
     data () {
       return {
-        loading: true
+        lastEvaluatedKeys: [],
+        loading: false
       }
     },
     methods: {
@@ -96,8 +99,10 @@
       deleteRecord () {
       },
       prevPage (e) {
+        var lastKey = this.lastEvaluatedKeys.pop()
         this.$store.dispatch('setPreviousResults', {
-          'tableName': this.tableName
+          'tableName': this.tableName,
+          'lastEvaluatedKey': lastKey
         })
       },
       nextPage (e) {
@@ -107,22 +112,42 @@
         })
       }
     },
+    watch: {
+      lastEvaluatedKey: function (val, oldVal) {
+        console.log(val)
+      }
+    },
     props: {
       tableName: {
         type: String,
         required: false
       }
     },
-    vuex: {
-      getters: {
-        results: (state) => state.results,
-        headers: (state) => state.headers,
-        lastEvaluatedKey: (state) => state.lastEvaluatedKey
-      }
-    },
     created () {
     },
     updated () {
+    },
+    mounted () {
     }
   }
 </script>
+
+<style scoped>
+  .key {
+    width: 80px;
+    display: inline-block;
+  }
+
+  .key>span {
+    float: right;
+  }
+
+  .value {
+    margin-left: 20px;
+    display: inline-block;
+  }
+
+  .value>span {
+    float: left;
+  }
+</style>

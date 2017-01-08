@@ -9,17 +9,16 @@ import _ from 'lodash'
 
 const state = {
   results: [],
+  lastEvaluatedKey: {},
   headers: [],
   tableName: '',
-  lastEvaluatedKey: {},
-  evaluatedKeys: [],
   tableInfo: {}
 }
 
 const getters = {
   results: state => state.results,
-  tableName: state => state.tableName,
   lastEvaluatedKey: state => state.lastEvaluatedKey,
+  tableName: state => state.tableName,
   tableInfo: state => state.tableInfo,
   headers: state => state.headers
 }
@@ -34,9 +33,7 @@ const mutations = {
     state.results = flattenResults
 
     state.tableName = results['tableName']
-    var lastEvaluatedKey = results['LastEvaluatedKey']
-    state.lastEvaluatedKey = lastEvaluatedKey
-    state.evaluatedKeys.push(lastEvaluatedKey)
+    state.lastEvaluatedKey = results['LastEvaluatedKey']
   },
   [PREVIOUS_SET_RESULTS] (state, results) {
     state.results = results['Items']
