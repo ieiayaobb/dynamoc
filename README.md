@@ -1,6 +1,7 @@
 # Dynamoc
 
 > Dynamoc is a GUI client for dynamodb-local, dynalite and AWS dynamodb
+
 ## Screenshots
 
 ## How to build
@@ -22,8 +23,14 @@ npm run lint
 npm run pack
 ```
 
-## TODO
-[]
+## TODO list
+ - [] Loading mask for operations
+ - [] Previous page for scan
+ - [] Query on Primary Key
+ - [] QUery on GSI
+ - [] View detail record on JSON value
+ - [] Edit specified record
+ - [] Delete specified record
 ---
 ## Thanks to
  - vuejs
