@@ -2,6 +2,10 @@
 
 > Dynamoc is a GUI client for dynamodb-local, dynalite and AWS dynamodb
 
+## Build status
+
+[![Build Status](https://travis-ci.org/ieiayaobb/dynamoc.svg?branch=master)](https://travis-ci.org/ieiayaobb/dynamoc)
+
 ## Screenshots
 
 ## How to build
@@ -40,6 +44,6 @@ npm run pack
  - Element-UI
  - electron
  - electron-vue
- 
+
 ## LINCESE
 MIT
