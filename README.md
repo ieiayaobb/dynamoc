@@ -8,9 +8,9 @@
 
 ## Screenshots
 
- ![connect](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/connect.png)
- ![datasheet](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/datasheet.png)
- ![record](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/record.png)
+ ![connect](https://raw.githubusercontent.com/ieiayaobb/dynamoc/master/screenshots/connect.png)
+ ![datasheet](https://raw.githubusercontent.com/ieiayaobb/dynamoc/master/screenshots/datasheet.png)
+ ![record](https://raw.githubusercontent.com/ieiayaobb/dynamoc/master/screenshots/record.png)
 
 ## How to build
 
