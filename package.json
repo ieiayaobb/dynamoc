@@ -1,7 +1,7 @@
 {
   "name": "dynamoc",
-  "version": "0.0.0",
-  "description": "An electron-vue project",
+  "version": "0.0.1",
+  "description": "A Dynamodb GUI client",
   "scripts": {
     "build": "node tasks/release.js",
     "build:clean": "cross-env PLATFORM_TARGET=clean node tasks/release.js",

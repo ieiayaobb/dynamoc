@@ -8,6 +8,10 @@
 
 ## Screenshots
 
+ ![connect](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/connect.png)
+ ![datasheet](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/datasheet.png)
+ ![record](https://github.com/ieiayaobb/dynamodbc/raw/master/screenshots/record.png)
+
 ## How to build
 
 ``` bash
@@ -31,7 +35,7 @@ npm run pack
  - [ ] Loading mask for operations
  - [ ] Previous page for scan
  - [ ] Query on Primary Key
- - [ ] QUery on GSI
+ - [ ] Query on GSI
  - [ ] View detail record on JSON value
  - [ ] Edit specified record
  - [ ] Delete specified record
