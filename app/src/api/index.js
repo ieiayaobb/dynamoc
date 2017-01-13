@@ -100,3 +100,21 @@ export const list = () => {
     })
   })
 }
+
+export const query = (tableName, indexName) => {
+  return new Promise(function (resolve, reject) {
+    dynamodb.query({
+      TableName: tableName,
+      IndexName: indexName,
+      KeyConditionExpression: {
+        
+      }
+    }, function (err, data) {
+      if (err) {
+        console.log(err, err.stack)
+      } else {
+        resolve(data)
+      }
+    })
+  })
+}

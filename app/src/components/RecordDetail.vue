@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-dialog :title="tableName" v-model="show" @close="close">
-      <el-form label-position="right" label-width="100px">
+      <el-form label-position="right" label-width="150px">
         <el-form-item :label="key" v-for="(value, key) in record">
-          <el-input auto-complete="off" :value="value" :disabled="true"></el-input>
+          <el-input auto-complete="off" :value="value"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="hide">Cancel</el-button>
+        <el-button @click="close">Cancel</el-button>
         <!-- <el-button type="primary" @click="hide">保存</el-button> -->
       </div>
     </el-dialog>
@@ -32,9 +32,6 @@
     updated () {
     },
     methods: {
-      hide () {
-        this.$store.dispatch('hideRecord')
-      },
       close () {
         this.$store.dispatch('hideRecord')
       }

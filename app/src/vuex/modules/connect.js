@@ -4,19 +4,19 @@ import {
 } from '../mutation-types'
 
 const state = {
-  show: true
+  connectShow: true
 }
 
 const getters = {
-  show: state => state.show
+  connectShow: state => state.connectShow
 }
 
 const mutations = {
   [SHOW_CONNECT] (state) {
-    state.show = true
+    state.connectShow = true
   },
   [HIDE_CONNECT] (state) {
-    state.show = false
+    state.connectShow = false
   }
 }
 

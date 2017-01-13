@@ -59,6 +59,7 @@
         this.defaultKey = item
       },
       query: function () {
+        console.log(this.defaultKey)
         console.log(this.hashKeyValue)
         console.log(this.rangeKeyValue)
       }

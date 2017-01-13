@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="Connect to the database" v-model="show" close-on-click-modal>
+    <el-dialog title="Connect to the database" v-model="connectShow" @close="close">
       <el-form label-position="right" label-width="120px">
         <el-form-item label="Host">
           <el-input auto-complete="off" v-model="host"></el-input>
@@ -33,7 +33,7 @@
       }
     },
     computed: mapGetters({
-      show: 'show'
+      connectShow: 'connectShow'
     }),
     methods: {
       close () {

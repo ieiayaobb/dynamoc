@@ -20,7 +20,18 @@ const mutations = {
     state.recordShow = true
 
     var flattenRecord = _.mapValues(record['Item'], function (ele) {
-      return _.values(ele)[0]
+      var value = _.values(ele)[0]
+      if (_.isObject(value)) {
+        return JSON.stringify(value)
+      } else if (_.isBoolean(value)) {
+        if (value) {
+          return 'true'
+        } else {
+          return 'false'
+        }
+      } else {
+        return value
+      }
     })
     state.record = flattenRecord
   },

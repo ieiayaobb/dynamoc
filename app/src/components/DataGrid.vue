@@ -30,7 +30,7 @@
         label="Operation"
         width="120">
         <span>
-          <el-button @click.native.prevent="handleClick($index)" type="text" size="small">View</el-button>
+          <el-button @click.native.prevent="view($index)" type="text" size="small">View</el-button>
           <!-- <el-button @click="deleteRecord" type="text" size="small">Delete</el-button> -->
         </span>
       </el-table-column>
@@ -74,7 +74,7 @@
       }
     },
     methods: {
-      handleClick (index) {
+      view (index) {
         var payload = {}
         var hashValue = this.results[index][this.headers[0]['AttributeName']]
         if (_.isNumber(hashValue)) {
