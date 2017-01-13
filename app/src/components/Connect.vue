@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="Connect to the database" v-model="show">
+    <el-dialog title="Connect to the database" v-model="show" close-on-click-modal>
       <el-form label-position="right" label-width="120px">
         <el-form-item label="Host">
           <el-input auto-complete="off" v-model="host"></el-input>

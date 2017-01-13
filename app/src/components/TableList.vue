@@ -1,5 +1,5 @@
 <template>
-  <div class="table-name-list-wrapper">
+  <div class="table-name-list-wrapper" v-loading.body="loading">
     <div class="table-name-list">
       <div v-for="(table_name,index) in tables" class="table-item" :class="{ active: isActive(index) }" @click="selectTable(table_name, index)">
         <i class="el-icon-document"></i><span class="table-name">{{ table_name }}</span>
@@ -18,6 +18,7 @@ export default {
   }),
   data () {
     return {
+      loading: false,
       realSelectedIndex: this.selectedIndex
     }
   },
@@ -35,6 +36,11 @@ export default {
     isActive: function (index) {
       return index === this.realSelectedIndex
     }
+  },
+  watch: {
+    tables: function (val, oldVal) {
+      console.log('new: %s, old: %s', val, oldVal)
+    }
   }
 }
 </script>
@@ -49,6 +55,7 @@ export default {
   overflow-x: auto;
   overflow-y: auto;
   max-height: 580px;
+  min-height: 400px;
 }
 
 .el-icon-menu {

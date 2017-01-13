@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="6">
         <div class="grid-content">
-          <el-select v-model="defaultKey" placeholder="Key" class="key-select">
+          <el-select v-model="defaultKey" placeholder="Key" class="key-select" @change="changeKey">
             <el-option-group
               v-for="group in keys"
               :label="group.label">
@@ -16,23 +16,28 @@
           </el-select>
         </div>
       </el-col>
-      <el-col :span="9">
+      <el-col :span="6">
         <div class="grid-content">
           <el-input
             class="key-input"
-            :placeholder="primaryKey.hash"
+            :placeholder="defaultKey.hash"
             v-model="hashKeyValue">
           </el-input>
         </div>
       </el-col>
-      <el-col :span="9">
+      <el-col :span="6">
         <div class="grid-content">
           <el-input
             class="key-input"
-            v-if="primaryKey.range"
-            :placeholder="primaryKey.range"
+            v-if="defaultKey.range"
+            :placeholder="defaultKey.range"
             v-model="rangeKeyValue">
           </el-input>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <div class="grid-content">
+          <el-button type="primary" @click="query">Query</el-button>
         </div>
       </el-col>
     </el-row>
@@ -47,6 +52,15 @@
     data () {
       return {
         defaultKey: 'primaryKey'
+      }
+    },
+    methods: {
+      changeKey: function (item) {
+        this.defaultKey = item
+      },
+      query: function () {
+        console.log(this.hashKeyValue)
+        console.log(this.rangeKeyValue)
       }
     },
     computed: {
@@ -66,7 +80,10 @@
         var globalSecondaryIndexArr = []
         _.forEach(this.globalSecondaryIndexKeys, function (globalSecondaryIndexKey) {
           globalSecondaryIndexArr.push({
-            value: globalSecondaryIndexKey.indexName,
+            value: {
+              'hash': globalSecondaryIndexKey.hash,
+              'range': globalSecondaryIndexKey.range
+            },
             label: globalSecondaryIndexKey.indexName
           })
         })
@@ -82,6 +99,7 @@
 
 <style scoped>
   .query-condition {
+    margin-bottom: 5px;
   }
 
   .key-select {

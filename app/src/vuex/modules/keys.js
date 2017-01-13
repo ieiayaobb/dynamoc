@@ -16,6 +16,7 @@ const getters = {
 
 const mutations = {
   [SET_KEYS] (state, results) {
+    state.globalSecondaryIndexKeys = []
     var primaryKey = {}
     _.forEach(results['Table']['KeySchema'], function (key) {
       if (key['KeyType'] === 'HASH') {
@@ -27,16 +28,16 @@ const mutations = {
     state.primaryKey = primaryKey
     _.forEach(results['Table']['GlobalSecondaryIndexes'], function (globalSecondaryIndex) {
       var indexName = globalSecondaryIndex['IndexName']
+      var globalSecondaryIndexKey = {}
       _.forEach(globalSecondaryIndex['KeySchema'], function (key) {
-        var globalSecondaryIndexKey = {}
         if (key['KeyType'] === 'HASH') {
           globalSecondaryIndexKey.hash = key['AttributeName']
         } else if (key['KeyType'] === 'RANGE') {
           globalSecondaryIndexKey.range = key['AttributeName']
         }
-        globalSecondaryIndexKey['indexName'] = indexName
-        state.globalSecondaryIndexKeys.push(globalSecondaryIndexKey)
       })
+      globalSecondaryIndexKey['indexName'] = indexName
+      state.globalSecondaryIndexKeys.push(globalSecondaryIndexKey)
     })
   }
 }
