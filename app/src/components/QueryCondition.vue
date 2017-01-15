@@ -74,7 +74,6 @@
           'hashValue': this.hashKeyValue,
           'rangeValue': this.rangeKeyValue
         }
-        console.log(payload)
         this.$store.dispatch('queryWithKey', payload)
       }
     },

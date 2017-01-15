@@ -106,15 +106,27 @@ export const query = (tableName, indexName, hashKey, rangeKey, hashValue, rangeV
   var expressionAttributeNames = {
     '#hk_anchor': hashKey
   }
-
+  var keyConditionExpression
+  if (!_.isUndefined(rangeValue)) {
+    expressionAttributeNames['#rk_anchor'] = rangeKey
+    keyConditionExpression = '#hk_anchor = :hv_anchor AND #rk_anchor = :rv_anchor'
+  } else {
+    keyConditionExpression = '#hk_anchor = :hv_anchor'
+  }
   var expressionAttributeValues = {
     ':hv_anchor': {
       'S': hashValue
     }
   }
+  if (!_.isUndefined(rangeValue)) {
+    expressionAttributeValues[':rv_anchor'] = {
+      'S': rangeValue
+    }
+  }
+
   var queryExpression = {
     TableName: tableName,
-    KeyConditionExpression: '#hk_anchor = :hv_anchor',
+    KeyConditionExpression: keyConditionExpression,
     ExpressionAttributeNames: expressionAttributeNames,
     ExpressionAttributeValues: expressionAttributeValues
   }
