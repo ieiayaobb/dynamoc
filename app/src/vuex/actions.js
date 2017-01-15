@@ -19,6 +19,7 @@ import {
     LIST_TABLES,
     SET_KEYS
 } from '../vuex/mutation-types'
+import _ from 'lodash'
 
 export const showConnect = ({ commit }) => {
   commit(SHOW_CONNECT)
@@ -41,8 +42,15 @@ export const setResults = ({ commit }, payload) => {
   })
 }
 
-export const queryWithKey = ({ commit }, payload) => {
+export const queryWithKey = ({ commit, dispatch }, payload) => {
+  console.log(payload)
+  if (_.isEmpty(payload.hashValue)) {
+    return dispatch('setResults', {
+      'tableName': payload.tableName
+    })
+  }
   return query(payload.tableName, payload.indexName, payload.hashKey, payload.rangeKey, payload.hashValue, payload.rangeValue).then((response) => {
+    response['tableName'] = payload.tableName
     commit(SET_RESULTS, response)
   })
 }
