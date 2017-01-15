@@ -1,5 +1,6 @@
 import {http} from 'vue'
 import AWS from 'aws-sdk'
+import _ from 'lodash'
 
 export const initAPI = () => {
   const ROOT = '/'
@@ -101,15 +102,29 @@ export const list = () => {
   })
 }
 
-export const query = (tableName, indexName) => {
+export const query = (tableName, indexName, hashKey, rangeKey, hashValue, rangeValue) => {
+  var expressionAttributeNames = {
+    '#hk_anchor': hashKey
+  }
+
+  var expressionAttributeValues = {
+    ':hv_anchor': {
+      'S': hashValue
+    }
+  }
+  var queryExpression = {
+    TableName: tableName,
+    KeyConditionExpression: '#hk_anchor = :hv_anchor',
+    ExpressionAttributeNames: expressionAttributeNames,
+    ExpressionAttributeValues: expressionAttributeValues
+  }
+
+  if (!_.isEmpty(indexName)) {
+
+  }
+  console.log(queryExpression)
   return new Promise(function (resolve, reject) {
-    dynamodb.query({
-      TableName: tableName,
-      IndexName: indexName,
-      KeyConditionExpression: {
-        
-      }
-    }, function (err, data) {
+    dynamodb.query(queryExpression, function (err, data) {
       if (err) {
         console.log(err, err.stack)
       } else {

@@ -12,3 +12,5 @@ thumbs.db
 compose/
 db/
 dynamoc-mas-x64/
+yarn.lock
+dist/

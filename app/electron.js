@@ -29,7 +29,7 @@ function createWindow () {
 
   if (process.env.NODE_ENV === 'development') {
     BrowserWindow.addDevToolsExtension(path.join(__dirname, '../node_modules/devtron'))
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     let installExtension = require('electron-devtools-installer')
 

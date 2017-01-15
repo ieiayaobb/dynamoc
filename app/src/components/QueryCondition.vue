@@ -3,12 +3,12 @@
     <el-row>
       <el-col :span="6">
         <div class="grid-content">
-          <el-select v-model="defaultKey" placeholder="Key" class="key-select" @change="changeKey">
+          <el-select v-model="currentKey" placeholder="Key" class="key-select" @change="changeKey">
             <el-option-group
-              v-for="group in keys"
-              :label="group.label">
+              v-for="eachKey in keys"
+              :label="eachKey.label">
               <el-option
-                v-for="item in group.options"
+                v-for="item in eachKey.options"
                 :label="item.label"
                 :value="item.value">
               </el-option>
@@ -20,7 +20,7 @@
         <div class="grid-content">
           <el-input
             class="key-input"
-            :placeholder="defaultKey.hash"
+            :placeholder="currentKey.hash"
             v-model="hashKeyValue">
           </el-input>
         </div>
@@ -29,8 +29,8 @@
         <div class="grid-content">
           <el-input
             class="key-input"
-            v-if="defaultKey.range"
-            :placeholder="defaultKey.range"
+            v-if="currentKey.range"
+            :placeholder="currentKey.range"
             v-model="rangeKeyValue">
           </el-input>
         </div>
@@ -51,17 +51,30 @@
   export default {
     data () {
       return {
-        defaultKey: 'primaryKey'
+        indexName: ''
+      }
+    },
+    props: {
+      tableName: {
+        type: String,
+        required: false
       }
     },
     methods: {
       changeKey: function (item) {
-        this.defaultKey = item
+        console.log(item)
+        this.currentKey = item
       },
       query: function () {
-        console.log(this.defaultKey)
-        console.log(this.hashKeyValue)
-        console.log(this.rangeKeyValue)
+        var payload = {
+          'tableName': this.tableName,
+          'indexName': this.indexName,
+          'hashKey': this.currentKey.hash,
+          'rangeKey': this.currentKey.range,
+          'hashValue': this.hashKeyValue,
+          'rangeValue': this.rangeKeyValue
+        }
+        this.$store.dispatch('queryWithKey', payload)
       }
     },
     computed: {
@@ -69,11 +82,17 @@
         primaryKey: 'primaryKey',
         globalSecondaryIndexKeys: 'globalSecondaryIndexKeys'
       }),
+      currentKey: function () {
+        return this.keys[0]['options'][0]['value']
+      },
       keys: function () {
         var keys = [{
           label: 'Primary Key',
           options: [{
-            value: 'primaryKey',
+            value: {
+              'hash': this.primaryKey.hash,
+              'range': this.primaryKey.range
+            },
             label: 'Primary Key'
           }]
         }]

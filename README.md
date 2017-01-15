@@ -36,7 +36,7 @@ npm run pack
  - [ ] Previous page for scan
  - [ ] Query on Primary Key
  - [ ] Query on GSI
- - [ ] View detail record on JSON value
+ - [x] View detail record on JSON value
  - [ ] Edit specified record
  - [ ] Delete specified record
 

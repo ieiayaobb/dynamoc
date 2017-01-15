@@ -1,5 +1,6 @@
 import {
   scan,
+  query,
   connect,
   list,
   record,
@@ -36,6 +37,12 @@ export const trigConnect = ({ commit, dispatch }, payload) => {
 export const setResults = ({ commit }, payload) => {
   return scan(payload.tableName, payload.lastEvaluatedKey).then((response) => {
     response['tableName'] = payload.tableName
+    commit(SET_RESULTS, response)
+  })
+}
+
+export const queryWithKey = ({ commit }, payload) => {
+  return query(payload.tableName, payload.indexName, payload.hashKey, payload.rangeKey, payload.hashValue, payload.rangeValue).then((response) => {
     commit(SET_RESULTS, response)
   })
 }

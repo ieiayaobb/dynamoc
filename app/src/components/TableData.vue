@@ -8,7 +8,7 @@
         </el-col>
       <el-col :span="24">
         <div class="grid-content">
-          <queryCondition></queryCondition>
+          <queryCondition :tableName="tableName"></queryCondition>
         </div>
       </el-col>
     </el-row>
