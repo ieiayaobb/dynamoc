@@ -19,6 +19,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <el-input
+            @change="changeHashKey"
             class="key-input"
             :placeholder="currentKey.hash"
             v-model="hashKeyValue">
@@ -37,7 +38,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content">
-          <el-button type="primary" @click="query">Query</el-button>
+          <el-button type="primary" @click="query">{{ scanOrQuery }}</el-button>
         </div>
       </el-col>
     </el-row>
@@ -51,7 +52,9 @@
   export default {
     data () {
       return {
-        indexName: ''
+        indexName: '',
+        currentKey: '',
+        scanOrQuery: 'Scan'
       }
     },
     props: {
@@ -61,9 +64,9 @@
       }
     },
     methods: {
-      changeKey: function (item) {
-        console.log(item)
-        this.currentKey = item
+      changeKey: function (value) {
+        this.currentKey = value
+        this.indexName = value.indexName
       },
       query: function () {
         var payload = {
@@ -75,6 +78,14 @@
           'rangeValue': this.rangeKeyValue
         }
         this.$store.dispatch('queryWithKey', payload)
+      },
+      changeHashKey: function (value) {
+        console.log(value)
+        if (_.isEmpty(value)) {
+          this.scanOrQuery = 'Scan'
+        } else {
+          this.scanOrQuery = 'Query'
+        }
       }
     },
     computed: {
@@ -82,9 +93,6 @@
         primaryKey: 'primaryKey',
         globalSecondaryIndexKeys: 'globalSecondaryIndexKeys'
       }),
-      currentKey: function () {
-        return this.keys[0]['options'][0]['value']
-      },
       keys: function () {
         var keys = [{
           label: 'Primary Key',
@@ -101,6 +109,7 @@
         _.forEach(this.globalSecondaryIndexKeys, function (globalSecondaryIndexKey) {
           globalSecondaryIndexArr.push({
             value: {
+              'indexName': globalSecondaryIndexKey.indexName,
               'hash': globalSecondaryIndexKey.hash,
               'range': globalSecondaryIndexKey.range
             },
@@ -123,6 +132,7 @@
   }
 
   .key-select {
+    z-index: 1000;
     width: 150px;
   }
 

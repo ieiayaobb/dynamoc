@@ -107,7 +107,7 @@ export const query = (tableName, indexName, hashKey, rangeKey, hashValue, rangeV
     '#hk_anchor': hashKey
   }
   var keyConditionExpression
-  if (!_.isUndefined(rangeValue)) {
+  if (!_.isUndefined(rangeValue) && !_.isEmpty(rangeValue)) {
     expressionAttributeNames['#rk_anchor'] = rangeKey
     keyConditionExpression = '#hk_anchor = :hv_anchor AND #rk_anchor = :rv_anchor'
   } else {
@@ -118,7 +118,7 @@ export const query = (tableName, indexName, hashKey, rangeKey, hashValue, rangeV
       'S': hashValue
     }
   }
-  if (!_.isUndefined(rangeValue)) {
+  if (!_.isUndefined(rangeValue) && !_.isEmpty(rangeValue)) {
     expressionAttributeValues[':rv_anchor'] = {
       'S': rangeValue
     }
@@ -128,11 +128,12 @@ export const query = (tableName, indexName, hashKey, rangeKey, hashValue, rangeV
     TableName: tableName,
     KeyConditionExpression: keyConditionExpression,
     ExpressionAttributeNames: expressionAttributeNames,
-    ExpressionAttributeValues: expressionAttributeValues
+    ExpressionAttributeValues: expressionAttributeValues,
+    Limit: 20
   }
 
   if (!_.isEmpty(indexName)) {
-
+    queryExpression['IndexName'] = indexName
   }
   console.log(queryExpression)
   return new Promise(function (resolve, reject) {

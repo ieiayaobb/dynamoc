@@ -34,8 +34,8 @@ npm run pack
 ## TODO list
  - [ ] Loading mask for operations
  - [ ] Previous page for scan
- - [ ] Query on Primary Key
- - [ ] Query on GSI
+ - [x] Query on Primary Key
+ - [x] Query on GSI
  - [x] View detail record on JSON value
  - [ ] Edit specified record
  - [ ] Delete specified record

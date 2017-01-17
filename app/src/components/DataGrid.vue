@@ -3,7 +3,7 @@
     <el-table
       :data="results"
       border
-      height="480"
+      height="460"
       v-loading.body="loading">
 
       <el-table-column
@@ -30,14 +30,14 @@
         label="Operation"
         width="120">
         <span>
-          <el-button @click.native.prevent="view($index)" type="text" size="small">View</el-button>
-          <!-- <el-button @click="deleteRecord" type="text" size="small">Delete</el-button> -->
+          <el-button @click.native.prevent="view($index)" type="text" size="mini">View</el-button>
+          <el-button @click="deleteRecord" :disabled="true" type="text" size="mini">Delete</el-button>
         </span>
       </el-table-column>
     </el-table>
     <div class="pagination">
       <el-button-group>
-        <!-- <el-button type="primary" icon="arrow-left" @click="prevPage">Previous</el-button> -->
+        <el-button type="primary" :disabled="true" size="small" icon="arrow-left" @click="prevPage">Prev</el-button>
         <el-button type="primary" size="small" @click="nextPage">Next<i class="el-icon-arrow-right el-icon--right"></i></el-button>
       </el-button-group>
     </div>
@@ -149,5 +149,9 @@
 
   .value>span {
     float: left;
+  }
+
+  .pagination {
+    margin-top: 5px;
   }
 </style>

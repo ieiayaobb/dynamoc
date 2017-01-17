@@ -5,7 +5,7 @@
         <div class="grid-content">
           <h2>{{ tableName }}</h2>
         </div>
-        </el-col>
+      </el-col>
       <el-col :span="24">
         <div class="grid-content">
           <queryCondition :tableName="tableName"></queryCondition>
