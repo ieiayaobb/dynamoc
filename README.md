@@ -42,6 +42,7 @@ npm run pack
  - [ ] Show JSON tree for record
  - [ ] Show console for each operation
  - [ ] Handle page size for query results
+ - [ ] Add a beautiful LOGO
 
 ---
 ## Thanks to
