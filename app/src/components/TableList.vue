@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     selectTable: function (tableName, index) {
+      this.$store.dispatch('showLoading')
       this.$store.dispatch('setResults', {
         'tableName': tableName
       })

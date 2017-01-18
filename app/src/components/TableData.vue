@@ -25,17 +25,21 @@
   import QueryCondition from './QueryCondition'
 
   export default {
+    name: 'tableData',
     computed: mapGetters({
       tableName: 'tableName'
     }),
-    vuex: {
-      getters: {
-        tableName: (state) => state.tableName
-      }
-    },
-    name: 'tableData',
     components: {
       DataGrid, RecordDetail, QueryCondition
+    },
+    beforeUpdate () {
+      this.$store.dispatch('hideLoading')
+      console.log('TableData beforeUpdate')
+    },
+    updated () {
+      // console.log('updated')
+      // this.$store.dispatch('hideLoading')
+      // this.loading = false
     }
   }
 </script>

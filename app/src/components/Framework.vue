@@ -5,7 +5,7 @@
       <el-col :span="4">
         <tableList></tableList>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="20" v-loading.body="loading">
         <tableData></tableData>
       </el-col>
     </el-row>
@@ -14,24 +14,28 @@
 </template>
 
 <script>
-import Navibar from './Navibar'
-import TableData from './TableData'
-import Connect from './Connect'
-import TableList from './TableList'
+  import { mapGetters } from 'vuex'
+  import Navibar from './Navibar'
+  import TableData from './TableData'
+  import Connect from './Connect'
+  import TableList from './TableList'
 
-export default {
-  name: 'framework',
-  components: {
-    Navibar, TableData, Connect, TableList
-  },
-  methods: {
-    handleOpen () {
-
+  export default {
+    name: 'framework',
+    computed: mapGetters({
+      loading: 'loading'
+    }),
+    components: {
+      Navibar, TableData, Connect, TableList
     },
-    handleClose () {
+    methods: {
+      handleOpen () {
+
+      },
+      handleClose () {
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

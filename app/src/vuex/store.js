@@ -5,6 +5,7 @@ import result from './modules/result'
 import tables from './modules/tables'
 import keys from './modules/keys'
 import records from './modules/records'
+import loading from './modules/loading'
 import * as actions from './actions'
 
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     result,
     tables,
     keys,
-    records
+    records,
+    loading
   },
   strict: true
 })

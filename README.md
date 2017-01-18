@@ -32,13 +32,16 @@ npm run pack
 ```
 
 ## TODO list
- - [ ] Loading mask for operations
+ - [x] Loading mask for operations
  - [ ] Previous page for scan
  - [x] Query on Primary Key
  - [x] Query on GSI
  - [x] View detail record on JSON value
  - [ ] Edit specified record
  - [ ] Delete specified record
+ - [ ] Show JSON tree for record
+ - [ ] Show console for each operation
+ - [ ] Handle page size for query results
 
 ---
 ## Thanks to

@@ -3,8 +3,7 @@
     <el-table
       :data="results"
       border
-      height="460"
-      v-loading.body="loading">
+      height="460">
 
       <el-table-column
         fixed
@@ -69,8 +68,7 @@
     name: 'dataGrid',
     data () {
       return {
-        lastEvaluatedKeys: [],
-        loading: false
+        lastEvaluatedKeys: []
       }
     },
     methods: {
@@ -106,15 +104,18 @@
         })
       },
       nextPage (e) {
+        this.$store.dispatch('showLoading')
         this.$store.dispatch('setResults', {
           'tableName': this.tableName,
           'lastEvaluatedKey': this.lastEvaluatedKey
         })
+        this.$store.dispatch('hideLoading')
       }
     },
     watch: {
-      lastEvaluatedKey: function (val, oldVal) {
-        console.log(val)
+      results: function (val, oldVal) {
+        // console.log(val)
+        // console.log(oldVal)
       }
     },
     props: {
@@ -123,11 +124,9 @@
         required: false
       }
     },
-    created () {
-    },
-    updated () {
-    },
-    mounted () {
+    beforeUpdate () {
+      // this.$store.dispatch('hideLoading')
+      console.log('DataGrid beforeUpdate')
     }
   }
 </script>

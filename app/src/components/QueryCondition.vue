@@ -80,7 +80,6 @@
         this.$store.dispatch('queryWithKey', payload)
       },
       changeHashKey: function (value) {
-        console.log(value)
         if (_.isEmpty(value)) {
           this.scanOrQuery = 'Scan'
         } else {

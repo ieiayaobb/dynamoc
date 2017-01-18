@@ -17,7 +17,9 @@ import {
     GET_RECORD,
     HIDE_RECORD,
     LIST_TABLES,
-    SET_KEYS
+    SET_KEYS,
+    SHOW_LOADING,
+    HIDE_LOADING
 } from '../vuex/mutation-types'
 import _ from 'lodash'
 
@@ -72,6 +74,16 @@ export const getRecord = ({ commit }, payload) => {
 
 export const hideRecord = ({ commit }) => {
   commit(HIDE_RECORD)
+}
+
+export const showLoading = ({ commit }) => {
+  commit(SHOW_LOADING)
+}
+
+export const hideLoading = ({ commit }) => {
+  setTimeout(function () {
+    commit(HIDE_LOADING)
+  }, 3000)
 }
 
 export const getHeaders = ({ commit }, tableName) => {
