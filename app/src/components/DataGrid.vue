@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="data-grid">
     <el-table
       :data="results"
       border
@@ -132,6 +132,8 @@
 </script>
 
 <style scoped>
+  .data-grid {
+  }
   .key {
     width: 80px;
     display: inline-block;
